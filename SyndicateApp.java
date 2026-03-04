@@ -119,3 +119,110 @@ class SwatTeam extends LawEnforcement {
         return getAttackPower() + 20;
     }
 }    //Rabaya(3 classes)
+
+
+class Operation {                                                             //Cansancio(3 classes)
+
+    private String operationName;
+
+    public Operation(String operationName) {
+
+        this.operationName = operationName;
+
+    }
+
+    public String getOperationName() {
+
+        return operationName;
+
+    }
+
+    public void startBattle(StreetUnit unit, LawEnforcement enemy) {
+
+        while (unit.isAlive() && enemy.isAlive()) {
+
+            enemy.takeDamage(unit.attack());
+
+            if (enemy.isAlive()) {
+
+                unit.takeDamage(enemy.attack());
+
+            }
+
+        }
+
+        if (unit.isAlive()) {
+
+            System.out.println(unit.getName() + " won the operation!");
+
+        } else {
+
+            System.out.println(enemy.getName() + " stopped the operation!");
+
+        }
+
+    }
+
+}
+
+class Hideout {
+
+    private List<StreetUnit> crew = new ArrayList<>();
+
+    private int money;
+
+    public void addCrewMember(StreetUnit unit) {
+
+        crew.add(unit);
+
+    }
+
+    public List<StreetUnit> getCrew() {
+
+        return crew;
+
+    }
+
+    public void addMoney(int amount) {
+
+        money += amount;
+
+    }
+
+    public int getMoney() {
+
+        return money;
+
+    }
+
+}
+
+public class SyndicateApp {
+
+    public static void main(String[] args) {
+
+        Hideout hideout = new Hideout();
+
+        Brawler brawler = new Brawler("Rico");
+
+        Hacker hacker = new Hacker("Zero");
+
+        hideout.addCrewMember(brawler);
+
+        hideout.addCrewMember(hacker);
+
+        PatrolOfficer officer = new PatrolOfficer("Officer Diaz");
+
+        SwatTeam swat = new SwatTeam("SWAT Alpha");
+
+        Operation robbery = new Operation("Downtown Bank Job");
+
+        robbery.startBattle(brawler, officer);
+
+        robbery.startBattle(hacker, swat);
+
+    }
+
+}
+                                                             //Cansancio(3 classes)
+
